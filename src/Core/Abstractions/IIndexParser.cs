@@ -4,5 +4,5 @@ namespace Core.Abstractions;
 
 public interface IIndexParser
 {
-    ICollection<IndexItem> ParseFile(string FileName);
+    ICollection<CaIndexItem> ParseFile(string fileName);
 }

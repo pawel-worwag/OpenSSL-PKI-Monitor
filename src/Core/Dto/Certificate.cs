@@ -2,7 +2,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Core.Dto;
 
-public record CaCertificate
+public record Certificate
 {
     public string Subject { get; set; } = string.Empty;
     public string SerialNumber { get; set; } = string.Empty;
@@ -13,10 +13,9 @@ public record CaCertificate
 
 public static class CaCertificateExtensions
 {
-    public static CaCertificate Map(this X509Certificate2 source)
+    public static Certificate Map(this X509Certificate2 source)
     {
-        
-        return new CaCertificate()
+        return new Certificate
         {
             Subject = source.Subject,
             SerialNumber = source.SerialNumber,

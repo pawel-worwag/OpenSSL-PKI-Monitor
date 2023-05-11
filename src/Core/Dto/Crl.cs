@@ -7,14 +7,14 @@ public record Crl
     public int Version { get; init; }
     public DateTime ThisUpdate { get; init; }
     public DateTime NextUpdate { get; init; }
-    public string Issuer { get; init; }
+    public string Issuer { get; init; } = string.Empty;
 }
 
 public static class CrlExtensions
 {
     public static Crl Map(this X509Crl source)
     {
-        return new Crl()
+        return new Crl
         {
             Version = source.Version,
             ThisUpdate = source.ThisUpdate,

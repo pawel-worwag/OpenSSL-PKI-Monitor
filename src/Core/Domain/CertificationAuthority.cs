@@ -5,8 +5,8 @@ namespace Core.Domain;
 
 public class CertificationAuthority
 {
-    public string Name { get; set; } = String.Empty;
-    public List<X509Certificate2> CaCertificates { get; set; } = new List<X509Certificate2>();
-    public List<X509Crl> Crls { get; set; } = new List<X509Crl>();
-    public List<IndexItem> Certificates { get; set; } = new List<IndexItem>();
+    public string Name { get; set; } = string.Empty;
+    public List<X509Certificate2> CaCertificates { get; set; } = new();
+    public List<X509Crl> Crls { get; set; } = new();
+    public List<CaIndexItem> Certificates { get; set; } = new();
 }

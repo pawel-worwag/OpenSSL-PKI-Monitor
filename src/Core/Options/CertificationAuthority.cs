@@ -1,6 +1,6 @@
 namespace Core.Options;
 
-public class CertificationAuthorityOptions
+public class CertificationAuthority
 {
     public string Name { get; set; } = string.Empty;
     public string IndexPath { get; set; } = string.Empty;
