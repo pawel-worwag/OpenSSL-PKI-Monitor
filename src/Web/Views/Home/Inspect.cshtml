@@ -1,4 +1,5 @@
-﻿@model List<Core.Dto.CertificationAuthority>
+﻿@using Core.Abstractions
+@model List<Core.Dto.CertificationAuthority>
 @{
     ViewData["Title"] = "Home Page";
     var id = 0;
@@ -32,7 +33,10 @@
                             <tbody>
                             @foreach (var cert in ca.CaCertificates)
                             {
-                                <tr>
+                                var className = "";
+                                if(cert.State == ValidState.Alert){className="table-warning";}
+                                if(cert.State == ValidState.Invalid){className="table-danger";}
+                                <tr class="@className">
                                     <td>@cert.Subject</td>
                                     <td>@cert.Issuer</td>
                                     <td>@cert.NotBefore</td>
@@ -54,13 +58,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach (var cert in ca.Crls)
+                            @foreach (var crl in ca.Crls)
                             {
-                                <tr>
-                                    <td>@cert.Version</td>
-                                    <td>@cert.ThisUpdate</td>
-                                    <td>@cert.NextUpdate</td>
-                                    <td>@cert.Issuer</td>
+                                var className = "";
+                                if(crl.State == ValidState.Alert){className="table-warning";}
+                                if(crl.State == ValidState.Invalid){className="table-danger";}
+                                <tr class="@className">
+                                    <td>@crl.Version</td>
+                                    <td>@crl.ThisUpdate</td>
+                                    <td>@crl.NextUpdate</td>
+                                    <td>@crl.Issuer</td>
                                 </tr>
                             }
                             </tbody>
@@ -82,7 +89,10 @@
                             <tbody>
                             @foreach (var item in ca.Cerfiticates)
                             {
-                                <tr>
+                                var className = "";
+                                if(item.State == ValidState.Alert){className="table-warning";}
+                                if(item.State == ValidState.Invalid){className="table-danger";}
+                                <tr class="@className">
                                     <td>@item.Status</td>
                                     <td>@item.ExpirationDate</td>
                                     <td>@item.RevocationDate</td>

@@ -22,7 +22,7 @@ public class CaRepository : ICaRepository
     public List<CertificationAuthority> GetCertificateAuthorities()
     {
         var ret = new List<CertificationAuthority>();
-        foreach (var caOpt in _caOptions.CertificationAuthorities)
+        foreach (var caOpt in _caOptions.CertificationAuthorities.OrderBy(x=>x.Name))
         {
             var ca = new CertificationAuthority
             {
@@ -42,7 +42,8 @@ public class CaRepository : ICaRepository
                 ca.Crls.Add(crl);
             }
 
-            ca.Certificates.AddRange(_parser.ParseFile(caOpt.IndexPath));
+            ca.Certificates.AddRange(_parser.ParseFile(caOpt.IndexPath)
+                .OrderByDescending(x=>x.ExpirationDate));
             ret.Add(ca);
         }
 

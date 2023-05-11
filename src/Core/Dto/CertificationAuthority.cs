@@ -1,3 +1,5 @@
+using Core.Abstractions;
+
 namespace Core.Dto;
 
 public record CertificationAuthority
