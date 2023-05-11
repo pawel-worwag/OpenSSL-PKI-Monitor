@@ -22,7 +22,7 @@ public class CaRepository : ICaRepository
     public List<CertificationAuthority> GetCertificateAuthorities()
     {
         var ret = new List<CertificationAuthority>();
-        foreach (var caOpt in _caOptions.CertificationAuthorities.OrderBy(x=>x.Name))
+        foreach (var caOpt in _caOptions.CertificationAuthorities)
         {
             var ca = new CertificationAuthority
             {
