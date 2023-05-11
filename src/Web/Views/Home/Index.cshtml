@@ -1,0 +1,101 @@
+﻿@model List<Core.Dto.CertificationAuthority>
+@{
+    ViewData["Title"] = "Home Page";
+    var id = 0;
+}
+
+<div class="accordion" id="accordionExample">
+    @foreach (var ca in Model)
+    {
+        id++;
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading-@id">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@id" aria-expanded="false" aria-controls="collapse-@id">
+                    @ca.Name
+                </button>
+            </h2>
+
+            <div id="collapse-@id" class="accordion-collapse collapse" aria-labelledby="heading-@id" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <h6 class="display-6 link-secondary" style="font-size: 110%; font-weight: bolder;">CA certificates</h6>
+                    <div style="padding-left:3em;">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Issuer</th>
+                                <th>Not Before</th>
+                                <th>Not After</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var cert in ca.CaCertificates)
+                            {
+                                <tr>
+                                    <td>@cert.Subject</td>
+                                    <td>@cert.Issuer</td>
+                                    <td>@cert.NotBefore</td>
+                                    <td>@cert.NotAfter</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                    <h6 class="display-6 link-secondary" style="font-size: 110%; font-weight: bolder;">CRLs</h6>
+                    <div style="padding-left:3em;">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>This update</th>
+                                <th>Next update</th>
+                                <th>Issuer</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var cert in ca.Crls)
+                            {
+                                <tr>
+                                    <td>@cert.Version</td>
+                                    <td>@cert.ThisUpdate</td>
+                                    <td>@cert.NextUpdate</td>
+                                    <td>@cert.Issuer</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                    <h6 class="display-6 link-secondary" style="font-size: 110%; font-weight: bolder;">Issued certificates</h6>
+                    <div style="padding-left:3em;">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Status flag</th>
+                                <th>Expiration date</th>
+                                <th>Revocation date</th>
+                                <th>Revocation reason</th>
+                                <th>Serial</th>
+                                <th>Distinguished name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in ca.Cerfiticates)
+                            {
+                                <tr>
+                                    <td>@item.Status</td>
+                                    <td>@item.ExpirationDate</td>
+                                    <td>@item.RevocationDate</td>
+                                    <td>@item.RevocationReason</td>
+                                    <td>@item.SerialNumber</td>
+                                    <td>@item.DistinguishedName</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
